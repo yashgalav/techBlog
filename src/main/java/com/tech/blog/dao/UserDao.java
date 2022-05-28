@@ -1,5 +1,6 @@
 package com.tech.blog.dao;
 
+import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -72,11 +73,33 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		
-
 		return getUser;
 	}
 	
-	
+
+	// update user
+	public boolean updateUser(User user) {
+		boolean f= false;
+		try {
+			String q = "update user set name = ?, email=?, password=?, gender=?, about=?, profile=? where id=?";
+			PreparedStatement p = this.con.prepareStatement(q);
+			p.setString(1, user.getName());
+			p.setString(2, user.getEmail());
+			p.setString(3, user.getPassword());
+			p.setString(4, user.getGender());
+			p.setString(5, user.getAbout());
+			p.setString(6, user.getProfile());
+			p.setInt(7, user.getId());
+			
+			p.executeUpdate();
+			f=true;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
+	}
+
 	
 	
 	

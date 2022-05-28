@@ -1,23 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <%@page import="com.tech.blog.entities.User"%>
 <%@page errorPage ="error.jsp" %>
 
+    
 <%
 User user = (User)session.getAttribute("currentUser");
 if(user == null){
 	response.sendRedirect("login.jsp");
-
 }
 
 %>
 
 
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <!-- css -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="css/style.css" type="text/css"></link>
@@ -66,7 +68,8 @@ if(user == null){
      
      <ul class="navbar-nav mr-right">
       <li class="nav-item">
-        <a class="nav-link" href="login.jsp"> <span class="fa fa-user-circle"></span> <%= user.getName() %></a>
+         <!-- Button trigger modal -->
+        <a class="nav-link" href="#"  data-toggle="modal" data-target="#myModal"> <span class="fa fa-user-circle"></span> <%= user.getName().toUpperCase() %> </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="LogoutServlet"> <span class="fa fa-user-circle"></span> LogOut</a>
@@ -78,6 +81,153 @@ if(user == null){
     
     <!-- end of navbar -->
     
+    <!-- Start of profile modal -->
+				
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header primaryBg text-white">
+				        <h5 class="modal-title" id="exampleModalLongTitle">TechBlog</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      
+				      
+				      <div class="modal-body">
+				        <div class="container text-center">
+				        	<img  src="pics/<%= user.getProfile() %>" class="img-fluid" style="border-radius:50%; max-width:150px; "> 
+				        	<h5 class="modal-title" id="exampleModalLongTitle"><%= user.getName().toUpperCase() %></h5>	
+				  		
+				  <!-- details  -->
+				  			
+				  			<div id="profile-original">
+				  				<table class="table">
+								  <tbody>
+								    <tr>
+								      <th scope="row">ID:</th>
+								      <td><%= user.getId() %></td>									    
+								  	</tr>
+								    <tr>
+								      <th scope="row">Name:</th>
+								      <td><%= user.getName() %></td>
+								    </tr>
+								    <tr>
+								      <th scope="row">Email:</th>
+								      <td><%= user.getEmail() %></td>
+								    </tr>
+								    <tr>
+								      <th scope="row">Gender:</th>
+								      <td><%= user.getGender().toUpperCase() %></td>
+								    </tr>
+								    <tr>
+								      <th scope="row">Registered Time:</th>
+								      <td><%= user.getDateTime().toLocaleString() %></td>
+								    </tr>
+								    <tr>
+								      <th scope="row">status:</th>
+								      <td><%= user.getAbout() %></td>
+								    </tr>
+								  </tbody>
+								</table>     
+				  			</div>
+				  			
+				  			<div id="profile-editable"  style="display:none;">
+				  				<h3 class="mt-2" >Please Edit Carefully.</h3>			
+								<form action="editableServlet" method="post" enctype="multipart/form-data">
+				  					<table class="table">
+				  						<tbody>
+				  						<tr>
+									      <th scope="row">ID:</th>
+									      <td><%= user.getId() %></td>									    
+									  	</tr>
+									    <tr>
+									      <th scope="row">Name:</th>
+									      <td><input type="text" name="user_name" class="form-control" value="<%= user.getName() %>"></td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Email:</th>
+									      <td><input type="email" name="user_email" class="form-control" value="<%= user.getEmail() %>"></td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Password:</th>
+									      <td><input type="text" name="user_password" class="form-control" value="<%= user.getPassword() %>"></td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Gender:</th>
+									      <td><%= user.getGender().toUpperCase() %></td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Registered Time:</th>
+									      <td><%= user.getDateTime().toLocaleString() %></td>
+									    </tr>
+									    <tr>
+									      <th scope="row">status:</th>
+									      <td><textarea row="3" name="about" class="form-control" value="<%= user.getAbout() %>"><%= user.getAbout() %></textarea></td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Profile change:</th>
+									      <td><input type="file" name="user_pic" class="form-control" > </td>
+									    </tr>
+									    
+									    </tbody>
+				  					</table>
+				  					
+				  					<div class="container mb-2">
+				  						<button type="submit" class="btn btn-outline-primary">Save</button>
+				  					</div>
+				  			   </form>		
+				  			</div>
+				  							        
+				        
+				      </div>
+				      
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        <button id="edit-btn" type="button" class="btn btn-primary">Edit</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+    
+    <!-- End of profile modal -->
        
+       
+    <!-- javascript -->
+		<script
+		  src="https://code.jquery.com/jquery-3.6.0.min.js"
+		  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		  crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="js/script.js" type ="text/javascript"></script>    
+       
+       <!-- code for hide and show the edidtable content using toggle button this code is reusable -->
+       <script>
+       		$(document).ready(function(){
+       			let editStatus = false;
+       			
+
+       			$("#edit-btn").click(function(){
+           			if( editStatus == false){
+       					$("#profile-original").hide();			
+       					$("#profile-editable").show();
+       					$(this).text("Back");
+       					editStatus = true;
+           			}
+           			else{
+           				$("#profile-original").show();
+       					$("#profile-editable").hide();
+       					$(this).text("Edit");
+           				editStatus = false;
+           			}
+           			
+           			
+           			})
+       		})
+       
+       </script>
 </body>
 </html>

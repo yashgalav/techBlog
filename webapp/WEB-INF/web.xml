@@ -42,5 +42,15 @@
   		<servlet-name>logoutServlet</servlet-name>
   		<url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
-  
+
+
+   <!-- Editable Servlet Mapping  -->
+  <servlet>
+  		<servlet-name>EditableServlet</servlet-name>
+  		<servlet-class>com.tech.blog.servlet.profileEditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>EditableServlet</servlet-name>
+  		<url-pattern>/editableServlet</url-pattern>
+  </servlet-mapping>  
 </web-app>

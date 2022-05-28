@@ -1,5 +1,5 @@
 <%@page import="com.tech.blog.entities.MessageClass"%>
-<%@page import="com.mysql.cj.protocol.Message"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -75,9 +75,11 @@
 			</div>
 		
 		</div>
-	
+		
 	
 	</main>
+	
+	
 
 
 <!-- javascript -->
