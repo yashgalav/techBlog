@@ -1,8 +1,12 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.tech.blog.helper.connectionProvider"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
 <%@page import="com.tech.blog.entities.User"%>
 <%@page errorPage ="error.jsp" %>
+<%@page import="com.tech.blog.entities.MessageClass"%>
+<%@page import="com.tech.blog.dao.PostDao,com.tech.blog.entities.Category" %>
 
     
 <%
@@ -63,6 +67,9 @@ if(user == null){
       <li class="nav-item">
         <a class="nav-link" href="#"> <span class="fa fa-address-book"></span> About</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#addPost-modal"> <span class="fa fa-address-book" ></span> Add Post</a>
+      </li>
       
      </ul>
      
@@ -80,6 +87,85 @@ if(user == null){
 </nav>
     
     <!-- end of navbar -->
+  
+  
+  
+     <!-- Add post modal -->		
+			<!-- Modal -->
+			
+			<div class="modal fade" id="addPost-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">+ Add post</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form action="addPostServlet" method="post">
+			        	<div class="form-group">
+			        		<select  class="form-control">
+			        			<option selected disabled="checked">---Select Category---</option>
+			        			<% 
+			        				PostDao pd = new PostDao(connectionProvider.getConnection());
+			        				ArrayList<Category> list = pd.getAllCategories();
+			        				for(Category c : list){
+			        			%>
+			        					<option><%= c.getC_name() %></option>
+			        			<%
+			        						
+			        				}
+			        			%>
+			        		</select>
+			        	</div>
+			        	
+			        	<div class="form-group">
+			        		<input type="text" placeholder="Enter the Title" class="form-control"/>
+			        	</div>
+			        	<div class="form-group">
+			        		<textarea style="height:200px" placeholder="Enter the your content" class="form-control"></textarea>
+			        	</div>
+			        	<div class="form-group">
+			        		<textarea style="height:200px" placeholder="Enter the your code if any" class="form-control"></textarea>
+			        	</div>
+			        	<div class="form-group">
+			        		<label>Select your picture</label>
+			        		<br>
+			        		<input type="file"/>
+			        	</div>
+			        </form>
+			        
+			        
+			        
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+     
+     <!-- END of Add post modal -->
+     
+     
+    <!-- for alert message -->
+					<%
+					 MessageClass m = (MessageClass) session.getAttribute("msg");  // Note: to add this messageClass we need to import the the messageClass.
+					 if(m != null){
+					%>
+					<div class="alert <%= m.getCssClass() %>" role="alert">				
+							<%= m.getContent() %>
+					</div>  
+					<%	  
+					session.removeAttribute("msg");
+					 }
+					%>
+					
+	 
+
+     				
     
     <!-- Start of profile modal -->
 				
@@ -194,6 +280,9 @@ if(user == null){
     
     <!-- End of profile modal -->
        
+   
+     
+     
        
     <!-- javascript -->
 		<script
