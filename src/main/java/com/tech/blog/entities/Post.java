@@ -1,6 +1,6 @@
 package com.tech.blog.entities;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Post {
 	private int pid;
@@ -10,6 +10,7 @@ public class Post {
 	private String p_pic;
 	private Timestamp p_date;
 	private int cat_id;
+	private int userId;
 	
 	
 	public Post() {
@@ -18,15 +19,16 @@ public class Post {
 	}
 
 
-	public Post(int pid, String p_title, String p_content, String p_code, String p_pic, Timestamp p_date, int cat_id) {
+	public Post(int pid, String p_title, String p_content, String p_code, String p_pic, Timestamp pTime, int cat_id, int userId) {
 		super();
 		this.pid = pid;
 		this.p_title = p_title;
 		this.p_content = p_content;
 		this.p_code = p_code;
 		this.p_pic = p_pic;
-		this.p_date = p_date;
+		this.p_date = pTime;
 		this.cat_id = cat_id;
+		this.userId = userId;
 	}
 
 
@@ -99,8 +101,19 @@ public class Post {
 		this.cat_id = cat_id;
 	}
 
+	
+	
+	public int getUserId() {
+		return userId;
+	}
 
-	public Post(String p_title, String p_content, String p_code, String p_pic, Timestamp p_date, int cat_id) {
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+
+	public Post(String p_title, String p_content, String p_code, String p_pic, Timestamp p_date, int cat_id, int userId) {
 		super();
 		this.p_title = p_title;
 		this.p_content = p_content;
@@ -108,6 +121,7 @@ public class Post {
 		this.p_pic = p_pic;
 		this.p_date = p_date;
 		this.cat_id = cat_id;
+		this.userId = userId;
 	}
 	
 	

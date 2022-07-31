@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>techBlog</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark primaryBg">
-  <a class="navbar-brand" href="index.jsp"><span class="fa fa-asterisk"></span> Tech Blog</a>
+  <a class="navbar-brand" href="index.jsp"><span class="fa fa-asterisk"></span>  Tech Blog</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -37,7 +37,7 @@
         <a class="nav-link" href="#"> <span class="fa fa-address-book"></span> About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="login.jsp"> <span class="fa fa-user-circle"></span> LogIn</a>
+        <a class="nav-link" href="login.jsp"> <span class="	fa fa-sign-in"></span> LogIn</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="registration.jsp"> <span class="fa fa-user-plus"></span> Sign Up</a>

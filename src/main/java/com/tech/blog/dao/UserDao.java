@@ -4,9 +4,11 @@ import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 
 import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.xdevapi.Result;
+import com.tech.blog.entities.Post;
 import com.tech.blog.entities.User;
 
 public class UserDao {
@@ -101,7 +103,35 @@ public class UserDao {
 	}
 
 	
-	
+	// get user by user Id
+	public User getUserByUserId(int uid){
+		User user = null;
+		
+		try {
+			PreparedStatement p = this.con.prepareStatement("select * from user where id =?");
+			p.setInt(1, uid);
+			ResultSet set = p.executeQuery();
+			
+			if(set.next()) {
+				
+				String  name = set.getString("name");
+				String  email = set.getString("email");
+				String  password = set.getString("password");
+				Timestamp  Time = set.getTimestamp("rtime");
+				String  gender = set.getString("gender");
+				String about = set.getString("about");
+				
+				user = new User(uid, name, email, password, gender,about,Time);
+				
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
 	
 	
 }

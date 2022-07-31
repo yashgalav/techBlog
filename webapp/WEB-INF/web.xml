@@ -52,5 +52,15 @@
   <servlet-mapping>
   		<servlet-name>EditableServlet</servlet-name>
   		<url-pattern>/editableServlet</url-pattern>
+  </servlet-mapping>
+  
+     <!-- Blog Post Servlet Mapping  -->
+  <servlet>
+  		<servlet-name>PostServlet</servlet-name>
+  		<servlet-class>com.tech.blog.servlet.addPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>PostServlet</servlet-name>
+  		<url-pattern>/addPostServlet</url-pattern>
   </servlet-mapping>  
 </web-app>

@@ -1,24 +1,34 @@
+<%@page import="com.tech.blog.dao.UserDao"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="com.tech.blog.entities.Category"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.tech.blog.helper.connectionProvider"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-<%@page import="com.tech.blog.entities.User"%>
-<%@page errorPage ="error.jsp" %>
 <%@page import="com.tech.blog.entities.MessageClass"%>
-<%@page import="com.tech.blog.dao.PostDao,com.tech.blog.entities.Category" %>
+<%@page import="com.tech.blog.entities.Post"%>
+<%@page import="com.tech.blog.helper.connectionProvider"%>
+<%@page import="com.tech.blog.dao.PostDao"%>
+<%@page import="com.tech.blog.entities.User"%>
+<%@page errorPage="error_404.jsp" %>
 
- <!-- validation code to check user is login or not  -->   
+
 <%
-User user = (User)session.getAttribute("currentUser");
-if(user == null){
-	response.sendRedirect("login.jsp");
-}
+	User user = (User)session.getAttribute("currentUser");
+	if(user == null){
+		response.sendRedirect("login.jsp");
+	}	
+%>
 
+<%
+	int postId = Integer.parseInt(request.getParameter("post_id"));
+	PostDao d = new PostDao(connectionProvider.getConnection());
+	Post p = d.getPostByPostId(postId);
+	
+	UserDao ud = new UserDao(connectionProvider.getConnection());
+	User userName = ud.getUserByUserId(p.getUserId());
 %>
 
 
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,64 +41,87 @@ if(user == null){
 <style>
 	.banner{
 		clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 90%, 71% 100%, 34% 91%, 0 100%, 0 0);	}
+
+	.head-card{
+		color: white;
+	}
+	.code{
+		background-color: 
+		#1a1a1a; color:white;
+		padding : 15px;
+	}
+	.ptitle{
+		font-weight: 100;
+		font-size: 40px;
+	}
+	.pdate{
+		font-style: italic;
+		font-weight:bold;
+	}
+	.post-user-info{
+		font-size: 20px;
+	}
 	body{
 		background: url('img/bgpic.jpg');
 		background-size: cover;
 		background-attachment:fix;
 	}
+	
 </style>
 
-<title>profile | techBlog</title>
-</head>
-<body>
-	<!-- start navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark primaryBg">
-  <a class="navbar-brand" href="index.jsp"><span class="fa fa-asterisk"></span> Tech Blog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#"> <span class="fa fa-code"></span> LearnCode with Yash<span class="sr-only">(current)</span></a>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="fa fa-reorder"></span> Categories
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Programing</a>
-          <a class="dropdown-item" href="#">Project Implementation</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Data Structure</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> <span class="fa fa-phone"></span> Contact</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> <span class="fa fa-address-book"></span> About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="modal" data-target="#addPost-modal"> <span class="fa fa-plus" ></span> Add Post</a>
-      </li>
-      
-     </ul>
-     
-     <ul class="navbar-nav mr-right">
-      <li class="nav-item">
-         <!-- Button trigger modal -->
-        <a class="nav-link" href="#"  data-toggle="modal" data-target="#myModal"> <span class="fa fa-user-circle"></span> <%= user.getName().toUpperCase() %> </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="LogoutServlet"> <span class="fa fa-sign-out"></span> LogOut</a>
-      </li>
-    </ul>
-    
-  </div>    
-</nav>
+<title><%= p.getP_title() %></title>
+</head>
+   <body>
+
+	<!-- start navbar -->
+		<nav class="navbar navbar-expand-lg navbar-dark primaryBg">
+		  <a class="navbar-brand" href="index.jsp"><span class="fa fa-asterisk"></span> Tech Blog</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="profile.jsp"> <span class="fa fa-code"></span> LearnCode with Yash<span class="sr-only">(current)</span></a>
+		      </li>
+		      
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          <span class="fa fa-reorder"></span> Categories
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="#">Programing</a>
+		          <a class="dropdown-item" href="#">Project Implementation</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" href="#">Data Structure</a>
+		        </div>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#"> <span class="fa fa-phone"></span> Contact</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#"> <span class="fa fa-address-book"></span> About</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#" data-toggle="modal" data-target="#addPost-modal"> <span class="fa fa-plus" ></span> Add Post</a>
+		      </li>
+		      
+		     </ul>
+		     
+		     <ul class="navbar-nav mr-right">
+		      <li class="nav-item">
+		         <!-- Button trigger modal -->
+		        <a class="nav-link" href="#"  data-toggle="modal" data-target="#myModal"> <span class="fa fa-user-circle"></span> <%= user.getName().toUpperCase() %> </a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="LogoutServlet"> <span class="fa fa-sign-out"></span> LogOut</a>
+		      </li>
+		    </ul>
+		    
+		  </div>    
+		</nav>
     
     <!-- end of navbar -->
   
@@ -156,7 +189,7 @@ if(user == null){
      <!-- END of Add post modal -->
      
      
-    <!-- for alert message -->
+    <!-- for alert message START HERE-->
 					<%
 					 MessageClass m = (MessageClass) session.getAttribute("msg");  // Note: to add this messageClass we need to import the the messageClass.
 					 if(m != null){
@@ -168,62 +201,52 @@ if(user == null){
 					session.removeAttribute("msg");
 					 }
 					%>
-	<!-- *********************************************************************** -->			
-	 
-     <!-- main body of the page START HERE -->
-	     <main>
-	     <div class="container ">
-	     	<div class="row mt-4">
-	     		<!-- first column  -->
-	     		<div class="col-md-2 ">
-	     			<div class="list-group">
-					  <a href="#" onclick="getPosts(0,this)" class="c-link list-group-item list-group-item-action active"> All Post </a>
-					  
-					  
-					  <%
-					  		PostDao dao = new PostDao(connectionProvider.getConnection());
-					  		ArrayList<Category> list1 = dao.getAllCategories();
-					  		
-					  		for(Category c : list1){
-					  	%>
-					  			
-					  			<a href="#" onclick="getPosts(<%= c.getCid() %>, this)" class="c-link list-group-item list-group-item-action"><%= c.getC_name() %></a>
-					  
-			  			<%
-					  		}
-					  
-					  %>
+	<!-- for alert message  END HERE-->
+
+	<!-- ************************************ main body start here **************************************************** -->
+
+		<div class="container">
+			<div class="row my-4">
+				<div class="col-md-10 offset-md-2">
+					<div class="card">
+						
+						<div class="card-header head-card primaryBg">
+							<h4 class="ptitle"><%= p.getP_title() %></h4>
+						</div>
+						<div class="card-body main-body">
+							<img class="card-img-top my-2" src="blogPic/<%= p.getP_pic() %>" alt="Card image cap">
+							
+							<div class="row my-3">
+								<div class="col-md-8">
+									<p class="post-user-info"><%= userName.getName() %> has Posted:</p>
+								</div>
+						        <div class="col-md-4">
+									<p class="pdate"><%= p.getP_date().toLocaleString() %> </p>
+								</div>
+							</div>
+							
+							
+							<p><%= p.getP_content() %>
+							<br>
+							<br>
+							<pre class="code"><%= p.getP_code() %></pre>
+						</div>
+						<div class="card-footer foot primaryBg">
+							<a href="profile.jsp" class="btn btn-outline-light btn-sm">Back</a>
+						</div>
 					</div>
-	     			
-	     		</div>
-	     		
-	     		<!-- Second column  -->
-	     		<div class="col-md-10" >
-	     			<!-- Post -->
-	     			<div class="container text-center" id="postLoader">
-	     				<i class="fa fa-refresh fa-4x fa-spin"></i>
-	     				<h3 class="mt-2">Loading...</h3>
-	     			</div>
-	     			 
-	     			 <!-- post Include here -->
-	     			 <div class="container-fluid" id="post-container">
-	     			
-	     			
-	     			</div>
-	     			
-	     			
-	     		</div>
-	     	</div>
-	     </div>
-	     
-	     </main>
-	       
-       
-     <!-- main body of the page END HERE --> 				
-    
-    <!-- *********************************************************************** -->
-    
-    <!-- Start of profile modal -->
+				</div>
+			</div>
+		
+		</div>
+
+
+
+
+	<!-- ************************************ main bode END HERE ******************************************************** -->
+
+
+  <!-- Start of profile modal -->
 				
 				<!-- Modal -->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -328,7 +351,7 @@ if(user == null){
 				      
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        <button id="edit-btn" type="button" class="btn btn-primary"><span class="	fa fa-pencil-square-o"></span> Edit</button>
+				        <button id="edit-btn" type="button" class="btn btn-primary">Edit</button>
 				      </div>
 				    </div>
 				  </div>
@@ -422,46 +445,20 @@ if(user == null){
        		
        </script>
 		
-		
-		<!-- loading Post using Ajax -->
-		<script >
-			
-			function getPosts(catId, ref){
-				
-				$("#postLoader").show();
-				$("#post-container").hide();
-				$(".c-link").removeClass('active');
-				
-				$.ajax({
-					url: "loadPost.jsp",
-					data:{cid:catId},
-					success: function(data, textStatus, jqXHR ){
-						console.log(data);
-						$("#postLoader").hide();
-						$("#post-container").show();
-						$("#post-container").html(data);
-						$(ref).addClass('active');
-						
-					},
-					error: function(jqXHR, textStatus, errorThrown){
-						
-					}
-				
-				})
-			}
-				
-		
-			
-			$(document).ready(function(e){
-				let allPostRef = $(".c-link")[0];
-				getPosts(0, allPostRef);
-			
-				
-			})
-		
-		</script>
 
 
 
-</body>
+
+
+
+
+
+
+
+
+	</body>
 </html>
+
+
+
+

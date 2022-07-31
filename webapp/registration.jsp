@@ -133,7 +133,7 @@
 							$("#submit-id").show();
 							$("#loader").hide();
 							if(data.trim() === 'done'){
-								swal("Registered Successfully...We going to edirecting to login page.")
+								swal("Registered Successfully...We going to redirecting to login page.")
 								.then((value) => {
 								  window.location="login.jsp";
 								});
