@@ -58,8 +58,8 @@
 					<div class="card">
 						 <div class="card-body">
 						     <h5 class="card-title">Java Programming</h5>
-						     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						     <a href="#" class="btn primaryBg text-white">Read more</a>
+						     <p class="card-text">Java is a popular programming language.Java is used to develop...</p>
+						     <a href="#" onclick="readMore()" class="btn primaryBg text-white">Read more</a>
 						  </div>
 					</div>
 				</div>
@@ -68,9 +68,9 @@
 				<div class="col-md-4">
 					<div class="card">
 						 <div class="card-body">
-						     <h5 class="card-title">Java Programming</h5>
-						     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						     <a href="#" class="btn primaryBg text-white">Read more</a>
+						     <h5 class="card-title">Django FrameWork</h5>
+						     <p class="card-text">Django is a high-level Python web framework that encourages rapid ...</p>
+						     <a href="#" onclick="readMore()" class="btn primaryBg text-white">Read more</a>
 						  </div>
 					</div>
 				</div>
@@ -79,9 +79,9 @@
 				<div class="col-md-4">
 					<div class="card">
 						 <div class="card-body">
-						     <h5 class="card-title">Java Programming</h5>
-						     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						     <a href="#" class="btn primaryBg text-white">Read more</a>
+						     <h5 class="card-title">Spring Boot FrameWork</h5>
+						     <p class="card-text">Spring Boot provides a good platform for Java developers to develop a...</p>
+						     <a href="#" onclick="readMore()" class="btn primaryBg text-white">Read more</a>
 						  </div>
 					</div>	
 				</div>
@@ -93,9 +93,9 @@
 				<div class="col-md-4">
 					<div class="card">
 						 <div class="card-body">
-						     <h5 class="card-title">Java Programming</h5>
-						     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						     <a href="#" class="btn primaryBg text-white">Read more</a>
+						     <h5 class="card-title">BootStrap </h5>
+						     <p class="card-text">Get started with Bootstrap, the world’s most popular framework for building...</p>
+						     <a href="#" onclick="readMore()" class="btn primaryBg text-white">Read more</a>
 						  </div>
 					</div>
 				</div>
@@ -104,9 +104,9 @@
 				<div class="col-md-4">
 					<div class="card">
 						 <div class="card-body">
-						     <h5 class="card-title">Java Programming</h5>
-						     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						     <a href="#" class="btn primaryBg text-white">Read more</a>
+						     <h5 class="card-title">Learn Go lang</h5>
+						     <p class="card-text">Go is a procedural programming language. It was developed in 2007 by...</p>
+						     <a href="#" onclick="readMore()" class="btn primaryBg text-white">Read more</a>
 						  </div>
 					</div>
 				</div>
@@ -115,9 +115,9 @@
 				<div class="col-md-4">
 					<div class="card">
 						 <div class="card-body">
-						     <h5 class="card-title">Java Programming</h5>
-						     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						     <a href="#" class="btn primaryBg text-white">Read more</a>
+						     <h5 class="card-title"> Data Science</h5>
+						     <p class="card-text">Data science is the domain of study that deals with vast volumes of...</p>
+						     <a href="#" onclick="readMore()" class="btn primaryBg text-white">Read more</a>
 						  </div>
 					</div>	
 				</div>
@@ -140,8 +140,19 @@
 		  crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<script src="js/script.js" type ="text/javascript"></script> 
+		<script src="js/script.js" type ="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> 
 
+
+	<script>
+		function readMore(){
+			swal("Please Login", "We are going to redirect you on login page...")
+				.then((value) => {
+				  window.location="profile.jsp";
+				});
+		}
+	
+	</script>
 
 </body>
 </html>

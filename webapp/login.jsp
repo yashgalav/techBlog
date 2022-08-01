@@ -66,6 +66,9 @@
 								  <div class="container text-center">
 										<button type="submit" class="btn btn-primary">Submit</button>									    
 								  </div>
+								  <div class="my-2">
+								  	<p >Create an Account if you havn't by click <a href="registration.jsp">here</a></p>
+								  </div>
 							</form>
 						</div>
 					</div>

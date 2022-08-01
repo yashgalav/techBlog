@@ -350,8 +350,8 @@ if(user == null){
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 		
 		<script src="js/script.js" type ="text/javascript"></script>    
-       
-       <!-- code for hide and show the editable content using toggle button this code is reusable -->
+             
+      <!-- code for hide and show the editable content using toggle button this code is reusable -->
        <script>
        		$(document).ready(function(){
        			let editStatus = false;
@@ -376,6 +376,7 @@ if(user == null){
        		})
        
        </script>
+
        
        <!-- add post js -->
        <script>
